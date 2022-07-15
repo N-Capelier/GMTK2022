@@ -5,6 +5,13 @@ public class PlayerShoot : MonoBehaviour
 {
 	bool canShoot = true;
 	Clock shootCooldownTimer;
+	[SerializeField] Transform cameraTransform;
+	[SerializeField] LayerMask enemyLayerMask;
+
+
+	[Header("Serialized for debug")]
+	[SerializeField] Weapon equipedWeapon;
+
 
 	private void Start()
 	{
@@ -24,10 +31,8 @@ public class PlayerShoot : MonoBehaviour
 
 		canShoot = false;
 
-		Debug.Log("Shoot");
+		equipedWeapon.Shoot(cameraTransform.position, transform.forward, enemyLayerMask);
 
-		shootCooldownTimer.SetTime(2f);
+		shootCooldownTimer.SetTime(equipedWeapon.cooldown);
 	}
-
-
 }
