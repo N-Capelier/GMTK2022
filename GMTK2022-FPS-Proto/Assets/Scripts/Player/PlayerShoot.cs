@@ -31,7 +31,7 @@ public class PlayerShoot : MonoBehaviour
 
 		canShoot = false;
 
-		equipedWeapon.Shoot(cameraTransform.position, transform.forward, enemyLayerMask);
+		equipedWeapon.Shoot(cameraTransform.position, cameraTransform.forward, enemyLayerMask);
 
 		shootCooldownTimer.SetTime(equipedWeapon.cooldown);
 	}
