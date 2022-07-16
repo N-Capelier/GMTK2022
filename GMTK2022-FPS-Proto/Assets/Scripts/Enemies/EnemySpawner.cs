@@ -9,20 +9,19 @@ public class EnemySpawner : MonoBehaviour
 	[SerializeField] float maxTimeBetweenSpawn;
 
 	float timeBetweenSpawn;
-	float nineMinutes;
+	float nineMinutes = 60f * 9f;
 
 	Clock spawnTimer;
 
 	private void Start()
 	{
-		nineMinutes = 60f * 9f;
 		timeBetweenSpawn = baseTimeBetweenSpawn;
 
 		spawnTimer = new Clock();
 		spawnTimer.ClockEnded += SpawnTimer_ClockEnded;
 		spawnTimer.SetTime(timeBetweenSpawn);
 
-		LerpTimeBetweenSpawn();
+		StartCoroutine(LerpTimeBetweenSpawn());
 	}
 
 	private void SpawnTimer_ClockEnded()

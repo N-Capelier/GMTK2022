@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,11 +16,17 @@ public abstract class Enemy : MonoBehaviour
 
 	public NavMeshAgent agent;
 
+	float baseSpeed = 3f;
+	float maxSpeed = 4f;
+	float nineMinutes = 60f * 9f;
+
 	private void Start()
 	{
 		player = PlayerInstance.Instance;
 
 		currentHealthPoints = maxHealthPoints;
+
+		StartCoroutine(LerpSpeed());
 	}
 
 	private void Update()
@@ -28,6 +35,22 @@ public abstract class Enemy : MonoBehaviour
 	}
 
 	protected abstract void UpdateDestination();
+
+	IEnumerator LerpSpeed()
+	{
+		float elapsedTime = 0f;
+		float completion;
+
+		while (elapsedTime < nineMinutes)
+		{
+			elapsedTime += Time.deltaTime;
+			completion = elapsedTime / nineMinutes;
+			agent.speed = Mathf.Lerp(baseSpeed, maxSpeed, completion);
+			yield return new WaitForEndOfFrame();
+		}
+
+		yield return new WaitForEndOfFrame();
+	}
 
 	public void ReceiveDamage(int amount)
 	{
