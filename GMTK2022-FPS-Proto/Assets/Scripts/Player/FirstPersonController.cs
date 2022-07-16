@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -12,6 +13,12 @@ namespace StarterAssets
 	public class FirstPersonController : MonoBehaviour
 	{
 		[Header("Player")]
+		[SerializeField] float sprintMaxTime;
+		[HideInInspector] public float sprintDelta;
+		bool isSprinting = false;
+		Clock sprintRecoverTimer;
+		float sprintDelay = 2f;
+		bool canSprint = true;
 		[Tooltip("Move speed of the character in m/s")]
 		public float MoveSpeed = 4.0f;
 		[Tooltip("Sprint speed of the character in m/s")]
@@ -64,7 +71,7 @@ namespace StarterAssets
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
 
-	
+
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 		private PlayerInput _playerInput;
 #endif
@@ -78,11 +85,11 @@ namespace StarterAssets
 		{
 			get
 			{
-				#if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
+#if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 				return _playerInput.currentControlScheme == "KeyboardMouse";
-				#else
+#else
 				return false;
-				#endif
+#endif
 			}
 		}
 
@@ -108,6 +115,15 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+
+			sprintDelta = sprintMaxTime;
+			sprintRecoverTimer = new Clock();
+			sprintRecoverTimer.ClockEnded += SprintRecoverTimer_ClockEnded;
+		}
+
+		private void SprintRecoverTimer_ClockEnded()
+		{
+			canSprint = true;
 		}
 
 		private void Update()
@@ -115,6 +131,7 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			CheckSprintStamina();
 		}
 
 		private void LateUpdate()
@@ -129,6 +146,39 @@ namespace StarterAssets
 			Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
 		}
 
+		private void CheckSprintStamina()
+		{
+			if (_input.sprint && canSprint)
+			{
+				if (sprintDelta > 0f)
+				{
+					isSprinting = true;
+					sprintDelta -= Time.deltaTime;
+					if (sprintDelta < 0f)
+					{
+						sprintDelta = 0f;
+					}
+				}
+				else
+				{
+					isSprinting = false;
+					canSprint = false;
+					sprintRecoverTimer.SetTime(sprintDelay);
+				}
+			}
+			else
+			{
+				if (sprintDelta < sprintMaxTime)
+				{
+					sprintDelta += Time.deltaTime;
+					if (sprintDelta > sprintMaxTime)
+					{
+						sprintDelta = sprintMaxTime;
+					}
+				}
+			}
+		}
+
 		private void CameraRotation()
 		{
 			// if there is an input
@@ -136,7 +186,7 @@ namespace StarterAssets
 			{
 				//Don't multiply mouse input by Time.deltaTime
 				float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
-				
+
 				_cinemachineTargetPitch += _input.look.y * RotationSpeed * deltaTimeMultiplier;
 				_rotationVelocity = _input.look.x * RotationSpeed * deltaTimeMultiplier;
 
@@ -154,7 +204,7 @@ namespace StarterAssets
 		private void Move()
 		{
 			// set target speed based on move speed, sprint speed and if sprint is pressed
-			float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+			float targetSpeed = isSprinting ? SprintSpeed : MoveSpeed;
 
 			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
