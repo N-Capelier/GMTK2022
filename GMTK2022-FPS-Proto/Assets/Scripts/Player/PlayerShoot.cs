@@ -4,7 +4,9 @@ using UnityEngine.InputSystem;
 public class PlayerShoot : MonoBehaviour
 {
 	bool canShoot = true;
+	bool isShooting = false;
 	Clock shootCooldownTimer;
+
 	[SerializeField] Transform cameraTransform;
 	[SerializeField] LayerMask enemyLayerMask;
 
@@ -19,20 +21,44 @@ public class PlayerShoot : MonoBehaviour
 		shootCooldownTimer.ClockEnded += ShootCooldownTimer_ClockEnded;
 	}
 
+	void ShootWeapon()
+	{
+		Debug.Log("Shooting");
+		equipedWeapon.Shoot(cameraTransform.position, cameraTransform.forward, enemyLayerMask);
+	}
+
 	private void ShootCooldownTimer_ClockEnded()
 	{
-		canShoot = true;
+		if (isShooting)
+		{
+			ShootWeapon();
+
+			shootCooldownTimer.SetTime(equipedWeapon.cooldown);
+		}
+		else
+		{
+			canShoot = true;
+		}
 	}
 
 	void OnShoot(InputValue value)
 	{
-		if (!canShoot)
-			return;
+		if (value.isPressed)
+		{
+			if (!canShoot)
+				return;
 
-		canShoot = false;
+			isShooting = true;
+			canShoot = false;
 
-		equipedWeapon.Shoot(cameraTransform.position, cameraTransform.forward, enemyLayerMask);
+			ShootWeapon();
 
-		shootCooldownTimer.SetTime(equipedWeapon.cooldown);
+			shootCooldownTimer.SetTime(equipedWeapon.cooldown);
+		}
+		else
+		{
+			isShooting = false;
+		}
+
 	}
 }

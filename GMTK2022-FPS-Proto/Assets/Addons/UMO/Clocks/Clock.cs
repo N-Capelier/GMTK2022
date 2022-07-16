@@ -159,12 +159,12 @@ public class Clock
     /// Stops the clock and set its time to zero.
     /// </summary>
     /// <param name="clock"></param>
-    public void Stop()
+    public void End()
     {
         time = 0f;
     }
 
-    public void StopWithoutEvent()
+    public void Stop()
     {
         canInvoke = false;
         time = 0f;

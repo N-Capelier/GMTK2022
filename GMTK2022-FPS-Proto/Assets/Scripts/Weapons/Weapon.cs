@@ -9,10 +9,16 @@ public abstract class Weapon : ScriptableObject
 
 	public float cooldown;
 
+	public float inaccuracy;
+
 	public abstract void Shoot(Vector3 origin, Vector3 direction, LayerMask layerMask);
 
 	public HitInfo RaySensor(Vector3 origin, Vector3 direction, LayerMask layerMask)
 	{
+		direction.x += Random.Range(-inaccuracy, inaccuracy);
+		direction.y += Random.Range(-inaccuracy, inaccuracy);
+		direction.z += Random.Range(-inaccuracy, inaccuracy);
+
 		RaycastHit hit;
 
 		if (Physics.Raycast(origin, direction, out hit, 20f, layerMask))

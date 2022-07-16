@@ -16,3 +16,4 @@ MonoBehaviour:
   maxBullets: 6
   currentBullets: 0
   cooldown: 0.2
+  inaccuracy: 0.02
