@@ -6,5 +6,8 @@ public class TestWeapon : Weapon
 	public override void Shoot(Vector3 origin, Vector3 direction, LayerMask layerMask)
 	{
 		HitInfo hit = RaySensor(origin, direction, layerMask);
+
+		if(hit.enemy != null)
+			hit.enemy.ReceiveDamage(2);
 	}
 }
