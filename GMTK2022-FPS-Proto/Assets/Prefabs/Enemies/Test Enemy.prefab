@@ -132,6 +132,10 @@ MonoBehaviour:
   maxHealthPoints: 20
   currentHealthPoints: 0
   damages: 2
+  dropPercentage: 5
+  pickupPrefabs:
+  - {fileID: 4551103828861911116, guid: 0ea7547211b7a8a408fc8e103a5498b2, type: 3}
+  - {fileID: 7090573458430786979, guid: 91c102f0ecc97234581fc1d65cac03ce, type: 3}
   agent: {fileID: 7654441674885403619}
 --- !u!114 &7893885919799261277
 MonoBehaviour:

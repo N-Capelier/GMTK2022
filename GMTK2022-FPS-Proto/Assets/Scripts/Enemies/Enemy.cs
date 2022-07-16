@@ -8,6 +8,9 @@ public abstract class Enemy : MonoBehaviour
 
 	public int damages;
 
+	[SerializeField] float dropPercentage;
+	[SerializeField] GameObject[] pickupPrefabs;
+
 	protected PlayerInstance player;
 
 	public NavMeshAgent agent;
@@ -41,6 +44,14 @@ public abstract class Enemy : MonoBehaviour
 
 	public void Death()
 	{
+		int dropChance = Random.Range(0, 100);
+
+		if(dropChance < dropPercentage)
+		{
+			int dropIndex = Random.Range(0, pickupPrefabs.Length);
+			Instantiate(pickupPrefabs[dropIndex], transform.position, Quaternion.identity);
+		}
+
 		Destroy(gameObject);
 	}
 }
