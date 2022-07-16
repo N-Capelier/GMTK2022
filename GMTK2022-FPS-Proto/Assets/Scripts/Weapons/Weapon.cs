@@ -7,8 +7,8 @@ public abstract class Weapon : ScriptableObject
 	public int maxBullets;
 	[HideInInspector] public int currentBullets;
 
+	public int damage;
 	public float cooldown;
-
 	public float inaccuracy;
 
 	public abstract void Shoot(Vector3 origin, Vector3 direction, LayerMask layerMask);

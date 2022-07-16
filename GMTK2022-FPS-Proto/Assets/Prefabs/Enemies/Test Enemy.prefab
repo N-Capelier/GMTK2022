@@ -91,6 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7654441674885403621}
   - component: {fileID: 7654441674885403620}
+  - component: {fileID: 7893885919799261277}
   - component: {fileID: 7654441674885403622}
   - component: {fileID: 7654441674885403624}
   - component: {fileID: 7654441674885403619}
@@ -128,10 +129,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 233f4be6883e73b449d5ce3672db035b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 6
+  maxHealthPoints: 20
   currentHealthPoints: 0
   damages: 2
   agent: {fileID: 7654441674885403619}
+--- !u!114 &7893885919799261277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7654441674885403625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 393530e2220f36643a45eac89887bf3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &7654441674885403622
 MeshFilter:
   m_ObjectHideFlags: 0

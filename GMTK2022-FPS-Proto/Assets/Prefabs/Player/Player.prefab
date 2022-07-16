@@ -212,10 +212,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 0}
+  defaultWeapon: {fileID: 11400000, guid: c0484fbec1d06df4baada6bc09e27508, type: 2}
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  equipedWeapon: {fileID: 0}
 --- !u!114 &8616685848737228371
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -21,7 +21,6 @@ public abstract class Enemy : MonoBehaviour
 
 	private void Update()
 	{
-		UpdateRendererRotation(player.transform.position);
 		UpdateDestination();
 	}
 
@@ -43,11 +42,5 @@ public abstract class Enemy : MonoBehaviour
 	public void Death()
 	{
 		Destroy(gameObject);
-	}
-
-	void UpdateRendererRotation(Vector3 playerPosition)
-	{
-		playerPosition.y = transform.position.y;
-		transform.LookAt(playerPosition);
 	}
 }

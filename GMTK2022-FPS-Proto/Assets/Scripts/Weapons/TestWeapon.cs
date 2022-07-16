@@ -8,6 +8,6 @@ public class TestWeapon : Weapon
 		HitInfo hit = RaySensor(origin, direction, layerMask);
 
 		if(hit.enemy != null)
-			hit.enemy.ReceiveDamage(2);
+			hit.enemy.ReceiveDamage(damage);
 	}
 }
