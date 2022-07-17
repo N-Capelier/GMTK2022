@@ -102,7 +102,7 @@ public class PlayerShoot : MonoBehaviour
 			//StartCoroutine(reloadAnimation(weapons[i]));
 		}
 		weapons[weapons.Length - 1] = Instantiate(defaultWeapon);
-		weapons[weapons.Length - 1].currentBullets = Random.Range(0, weapons[weapons.Length - 1].maxBullets + 1);
+		weapons[weapons.Length - 1].currentBullets = Random.Range(1, weapons[weapons.Length - 1].maxBullets + 1);
 	}
 
 	private void ShootCooldownTimer_ClockEnded()
@@ -127,7 +127,7 @@ public class PlayerShoot : MonoBehaviour
 		for (int i = 0; i < weapons.Length; i++)
 		{
 			weapons[i] = Instantiate(weapon);
-			weapons[i].currentBullets = Random.Range(0, weapons[i].maxBullets + 1);
+			weapons[i].currentBullets = Random.Range(1, weapons[i].maxBullets + 1);
 		}
 
 		if(!isReloading)

@@ -168,6 +168,7 @@ namespace StarterAssets
 			}
 			else
 			{
+				isSprinting = false;
 				if (sprintDelta < sprintMaxTime)
 				{
 					sprintDelta += Time.deltaTime;
