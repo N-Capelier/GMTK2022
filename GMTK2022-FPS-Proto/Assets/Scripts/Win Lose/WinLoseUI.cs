@@ -8,6 +8,8 @@ public class WinLoseUI : MonoBehaviour
 
 	bool canPlay = false;
 
+	[SerializeField] bool isMainMenu = false;
+
 	private void Start()
 	{
 		StartCoroutine(Wait());
@@ -16,7 +18,8 @@ public class WinLoseUI : MonoBehaviour
 
 	IEnumerator Wait()
 	{
-		yield return new WaitForSeconds(2f);
+		float time = isMainMenu ? 0.6f : 1.8f;
+		yield return new WaitForSeconds(time);
 		canPlay = true;
 	}
 
