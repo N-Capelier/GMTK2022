@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: d100
   maxBullets: 100
   currentBullets: 0
-  damage: 1
+  damage: 4
   cooldown: 0.05
   inaccuracy: 0.06
   exploFx: {fileID: 4273719892591562544, guid: 013e61300ab468441be9b806a251cdd2, type: 3}

@@ -23,6 +23,9 @@ public class PlayerShoot : MonoBehaviour
 	public delegate void UIEventHandler();
 	public event UIEventHandler UpdateWeaponUI;
 
+	//SOUND
+	AudioManager audioManager;
+
 	// UI elements
 	public GameObject gunUi;
 	public GameObject gunPoint;
@@ -43,7 +46,7 @@ public class PlayerShoot : MonoBehaviour
 		SetWeapon(defaultWeapon);
 		crossHairOriginalSize = crossHair.transform.localScale;
 
-
+		audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
 	}
 
 	void ShootWeapon()
@@ -122,6 +125,8 @@ public class PlayerShoot : MonoBehaviour
 			return;
 
 		Pickup pickup = other.GetComponent<Pickup>();
+		//SFX
+		audioManager.PlaySound(6,transform.position);
 		SetWeapon(pickup.weapon);
 		Destroy(pickup.gameObject);
 	}
@@ -132,7 +137,7 @@ public class PlayerShoot : MonoBehaviour
     {
 		//HAND ANIM
 		handUiAnimator.Play("hand_reload");
-
+		audioManager.PlaySound(9, transform.position);
 		//ENABLE IMAGE
 		reloadDice.GetComponent<Image>().enabled = true;
 		//STOP TWEEN
@@ -156,8 +161,10 @@ public class PlayerShoot : MonoBehaviour
 		Vector3 gunPos =  gunUi.transform.position;
 		gunPos.y = gunPos.y + 1000;
 		reloadDice.transform.position = gunPos;
-		//SET GUN ANIM
-		gunUiAnimator.Play("gun_reload");
+        //SET GUN ANIM
+        gunUiAnimator.Play("gun_reload");
+		//SOUND
+        audioManager.PlaySound(13, transform.position);
 		//MOVE DICE DOWN
 		reloadDice.LeanMoveY(reloadDice.transform.position.y - gunPos.y * 0.7f, reloadTime *0.2f);
 		//ROTATE DICE
@@ -166,6 +173,9 @@ public class PlayerShoot : MonoBehaviour
 			reloadDice.LeanRotateZ(reloadDice.transform.localRotation.z + 40 * i, 0.05f);
 			yield return new WaitForSeconds(reloadTime *0.2f/60);
 		}
+		//SOUND
+		audioManager.PlaySound(10, transform.position);
+		audioManager.PlaySound(11, transform.position);
 		//SET GUN ANIM
 		gunUiAnimator.Play("gun_reload2");
 		// SET INACTIVE
@@ -186,6 +196,7 @@ public class PlayerShoot : MonoBehaviour
     {
 		//FX OF THE SHOT
 		gunUiAnimator.Play("gun_shoot");
+		audioManager.PlaySoundVariant(4, transform.position);
 		shotFx.transform.position = gunPoint.transform.position;
 		shotFxAnimator.Play("explo" + shotFxLoop.ToString());
 		shotFx.transform.Rotate(0, 0, Random.Range(0, 360));

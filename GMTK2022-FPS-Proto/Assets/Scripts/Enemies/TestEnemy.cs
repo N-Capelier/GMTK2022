@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TestEnemy : Enemy
 {
-	protected override void UpdateDestination()
+    protected override void UpdateDestination()
 	{
 		if (Vector3.Distance(transform.position, player.transform.position) > 1.8f)
 		{

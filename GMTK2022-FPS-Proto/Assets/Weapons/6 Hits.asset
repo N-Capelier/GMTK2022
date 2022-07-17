@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: d6
   maxBullets: 6
   currentBullets: 0
-  damage: 5
+  damage: 10
   cooldown: 0.32
   inaccuracy: 0.02
   exploFx: {fileID: 4273719892591562544, guid: 013e61300ab468441be9b806a251cdd2, type: 3}

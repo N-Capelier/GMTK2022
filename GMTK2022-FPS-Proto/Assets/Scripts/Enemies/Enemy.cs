@@ -21,13 +21,23 @@ public abstract class Enemy : MonoBehaviour
 	float maxSpeed = 4f;
 	float nineMinutes = 60f * 9f;
 
+	//SOUND
+	AudioManager audioManager;
+
+	private GameObject render;
+	public GameObject remains;
+
 	private void Start()
 	{
 		player = PlayerInstance.Instance;
 
 		currentHealthPoints = maxHealthPoints;
 
+		audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+
 		StartCoroutine(LerpSpeed());
+		render = gameObject.transform.GetChild(0).gameObject;
+		StartCoroutine(mirrorSelf());
 	}
 
 	private void Update()
@@ -80,8 +90,16 @@ public abstract class Enemy : MonoBehaviour
         else
 		{
 			Instantiate(dieFx, transform.position, Quaternion.identity);
+			Instantiate(remains, new Vector3(transform.position.x,transform.position.y - 0.25f,transform.position.z), Quaternion.identity);
 		}
-
+		audioManager.PlaySoundVariant(5, transform.position);
 		Destroy(gameObject);
+	}
+
+	IEnumerator mirrorSelf()
+	{
+		yield return new WaitForSeconds(0.6f);
+		render.LeanScaleX(-render.transform.localScale.x, 0.01f);
+		StartCoroutine(mirrorSelf());
 	}
 }

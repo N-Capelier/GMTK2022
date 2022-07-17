@@ -12,6 +12,9 @@ public class PlayerInstance : Singleton<PlayerInstance>
 	Clock invulnerabilityTimer;
 	bool canTakeDamage = true;
 
+	UiAnimation ui;
+	AudioManager audioManager;
+
 	private void Awake()
 	{
 		CreateSingleton();
@@ -23,6 +26,8 @@ public class PlayerInstance : Singleton<PlayerInstance>
 
 		invulnerabilityTimer = new Clock();
 		invulnerabilityTimer.ClockEnded += InvulnerabilityTimer_ClockEnded;
+		ui = GameObject.Find("Player_UI").GetComponent<UiAnimation>();
+		audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
 	}
 
 	private void InvulnerabilityTimer_ClockEnded()
@@ -46,6 +51,8 @@ public class PlayerInstance : Singleton<PlayerInstance>
 		else
 		{
 			currentHealthPoints -= amount;
+			ui.UpdateHearts(currentHealthPoints);
+			audioManager.PlaySound(12, gameObject.transform.position);
 		}
 
 		return true;

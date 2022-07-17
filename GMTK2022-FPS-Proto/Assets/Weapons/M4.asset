@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: d20
   maxBullets: 20
   currentBullets: 0
-  damage: 3
+  damage: 10
   cooldown: 0.18
   inaccuracy: 0.03
   exploFx: {fileID: 4273719892591562544, guid: 013e61300ab468441be9b806a251cdd2, type: 3}

@@ -131,14 +131,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealthPoints: 20
   currentHealthPoints: 0
-  damages: 2
-  dropPercentage: 5
+  damages: 1
+  dropPercentage: 10
   pickupPrefabs:
   - {fileID: 4551103828861911116, guid: 0ea7547211b7a8a408fc8e103a5498b2, type: 3}
   - {fileID: 7090573458430786979, guid: 91c102f0ecc97234581fc1d65cac03ce, type: 3}
   agent: {fileID: 7654441674885403619}
   luckFx: {fileID: 4368331734737773084, guid: 14b861e6e82851f4d8a41699afb82b5e, type: 3}
   dieFx: {fileID: 8757431946483967904, guid: 9f53fd1da4821b248b76d6c279a60c96, type: 3}
+  remains: {fileID: 7090275997208283172, guid: 75e82f8c332e9fa46be2609aa6b9db02, type: 3}
 --- !u!114 &7893885919799261277
 MonoBehaviour:
   m_ObjectHideFlags: 0
