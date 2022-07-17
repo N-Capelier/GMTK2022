@@ -23,7 +23,7 @@ public abstract class Weapon : ScriptableObject
 
 		RaycastHit hit;
 
-		if (Physics.Raycast(origin, direction, out hit, 20f, layerMask))
+		if (Physics.Raycast(origin, direction, out hit, 40f, layerMask))
 		{
 			return new HitInfo(hit.transform.GetComponent<Enemy>(), hit.point);
 		}
