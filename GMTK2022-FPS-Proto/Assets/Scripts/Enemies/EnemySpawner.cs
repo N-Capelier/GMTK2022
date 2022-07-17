@@ -13,6 +13,8 @@ public class EnemySpawner : MonoBehaviour
 
 	Clock spawnTimer;
 
+	WaitForSeconds spawnDelay = new WaitForSeconds(1f);
+
 	private void Start()
 	{
 		timeBetweenSpawn = baseTimeBetweenSpawn;
@@ -26,12 +28,14 @@ public class EnemySpawner : MonoBehaviour
 
 	private void SpawnTimer_ClockEnded()
 	{
-		SpawnEnemy();
+		StartCoroutine(SpawnTwoEnemies());
 		spawnTimer.SetTime(timeBetweenSpawn);
 	}
 
-	void SpawnEnemy()
+	IEnumerator SpawnTwoEnemies()
 	{
+		Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+		yield return spawnDelay;
 		Instantiate(enemyPrefab, transform.position, Quaternion.identity);
 	}
 

@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 233f4be6883e73b449d5ce3672db035b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 25
+  maxHealthPoints: 20
   currentHealthPoints: 0
   damages: 1
   dropPercentage: 5
