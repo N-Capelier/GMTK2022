@@ -161,11 +161,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8078788421724729252, guid: 0e1a94ba7594f4044beab8ca7ed0b165, type: 3}
       propertyPath: maxTimeBetweenSpawn
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8078788421724729252, guid: 0e1a94ba7594f4044beab8ca7ed0b165, type: 3}
       propertyPath: baseTimeBetweenSpawn
-      value: 16
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 8078788421724729253, guid: 0e1a94ba7594f4044beab8ca7ed0b165, type: 3}
       propertyPath: m_RootOrder
@@ -444,11 +444,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8078788421724729252, guid: 0e1a94ba7594f4044beab8ca7ed0b165, type: 3}
       propertyPath: maxTimeBetweenSpawn
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8078788421724729252, guid: 0e1a94ba7594f4044beab8ca7ed0b165, type: 3}
       propertyPath: baseTimeBetweenSpawn
-      value: 16
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 8078788421724729253, guid: 0e1a94ba7594f4044beab8ca7ed0b165, type: 3}
       propertyPath: m_RootOrder
@@ -1008,11 +1008,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8078788421724729252, guid: 0e1a94ba7594f4044beab8ca7ed0b165, type: 3}
       propertyPath: maxTimeBetweenSpawn
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8078788421724729252, guid: 0e1a94ba7594f4044beab8ca7ed0b165, type: 3}
       propertyPath: baseTimeBetweenSpawn
-      value: 16
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 8078788421724729253, guid: 0e1a94ba7594f4044beab8ca7ed0b165, type: 3}
       propertyPath: m_RootOrder
@@ -1229,11 +1229,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8078788421724729252, guid: 0e1a94ba7594f4044beab8ca7ed0b165, type: 3}
       propertyPath: maxTimeBetweenSpawn
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8078788421724729252, guid: 0e1a94ba7594f4044beab8ca7ed0b165, type: 3}
       propertyPath: baseTimeBetweenSpawn
-      value: 16
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 8078788421724729253, guid: 0e1a94ba7594f4044beab8ca7ed0b165, type: 3}
       propertyPath: m_RootOrder
@@ -1313,11 +1313,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8078788421724729252, guid: 0e1a94ba7594f4044beab8ca7ed0b165, type: 3}
       propertyPath: maxTimeBetweenSpawn
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8078788421724729252, guid: 0e1a94ba7594f4044beab8ca7ed0b165, type: 3}
       propertyPath: baseTimeBetweenSpawn
-      value: 16
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 8078788421724729253, guid: 0e1a94ba7594f4044beab8ca7ed0b165, type: 3}
       propertyPath: m_RootOrder
