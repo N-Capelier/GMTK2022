@@ -129,10 +129,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 233f4be6883e73b449d5ce3672db035b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 20
+  maxHealthPoints: 25
   currentHealthPoints: 0
   damages: 1
-  dropPercentage: 10
+  dropPercentage: 5
   pickupPrefabs:
   - {fileID: 4551103828861911116, guid: 0ea7547211b7a8a408fc8e103a5498b2, type: 3}
   - {fileID: 7090573458430786979, guid: 91c102f0ecc97234581fc1d65cac03ce, type: 3}

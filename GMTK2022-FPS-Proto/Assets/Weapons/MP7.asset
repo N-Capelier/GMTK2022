@@ -16,7 +16,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 6360826264cdc444aae7d2f8847d73b5, type: 3}
   maxBullets: 100
   currentBullets: 0
-  damage: 4
+  damage: 3
   cooldown: 0.05
   inaccuracy: 0.06
   exploFx: {fileID: 4273719892591562544, guid: 013e61300ab468441be9b806a251cdd2, type: 3}
