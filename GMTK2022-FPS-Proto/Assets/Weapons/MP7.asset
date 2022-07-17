@@ -21,3 +21,4 @@ MonoBehaviour:
   inaccuracy: 0.06
   exploFx: {fileID: 4273719892591562544, guid: 013e61300ab468441be9b806a251cdd2, type: 3}
   bloodFx: {fileID: 350174935275705668, guid: 20d0421d495522d4ca29323debbe258c, type: 3}
+  plingFx: {fileID: 1413809099294669440, guid: d0571efc0d0bb2c4dae2b359da52560d, type: 3}
