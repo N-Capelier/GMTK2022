@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerInstance : Singleton<PlayerInstance>
 {
@@ -31,6 +32,8 @@ public class PlayerInstance : Singleton<PlayerInstance>
 		invulnerabilityTimer.ClockEnded += InvulnerabilityTimer_ClockEnded;
 		ui = GameObject.Find("Player_UI").GetComponent<UiAnimation>();
 		audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 
 	private void InvulnerabilityTimer_ClockEnded()
@@ -63,10 +66,6 @@ public class PlayerInstance : Singleton<PlayerInstance>
 
 	private void Death()
 	{
-#if UNITY_EDITOR
-		EditorApplication.ExitPlaymode();
-#else
-		Application.Quit();
-#endif
+		SceneManager.LoadScene("Lose");
 	}
 }

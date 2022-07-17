@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UiAnimation : Singleton<UiAnimation>
 {
@@ -43,7 +44,7 @@ public class UiAnimation : Singleton<UiAnimation>
 
         if(currentTime <= 0)
 		{
-            ///////////// END GAME
+            SceneManager.LoadScene("Win");
 		}
 	}
 

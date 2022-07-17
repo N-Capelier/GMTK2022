@@ -11,11 +11,12 @@ public class WinLoseUI : MonoBehaviour
 	private void Start()
 	{
 		StartCoroutine(Wait());
+		Cursor.lockState = CursorLockMode.None;
 	}
 
 	IEnumerator Wait()
 	{
-		yield return new WaitForSeconds(2.5f);
+		yield return new WaitForSeconds(2f);
 		canPlay = true;
 	}
 
