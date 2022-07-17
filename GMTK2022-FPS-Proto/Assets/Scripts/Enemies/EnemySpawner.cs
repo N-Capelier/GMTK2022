@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-	[SerializeField] GameObject enemyPrefab;
+	[SerializeField] GameObject[] enemyPrefabs;
 
 	[SerializeField] float baseTimeBetweenSpawn;
 	[SerializeField] float maxTimeBetweenSpawn;
@@ -34,9 +34,9 @@ public class EnemySpawner : MonoBehaviour
 
 	IEnumerator SpawnTwoEnemies()
 	{
-		Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+		Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], transform.position, Quaternion.identity);
 		yield return spawnDelay;
-		Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+		Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], transform.position, Quaternion.identity);
 	}
 
 	IEnumerator LerpTimeBetweenSpawn()
