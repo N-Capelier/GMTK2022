@@ -446,7 +446,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Guns N'Dices
+  m_text: Guns N'Dice
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7076eab770a85d24d8849a72ed4d1ee9, type: 2}
   m_sharedMaterial: {fileID: -6060752667807295349, guid: 7076eab770a85d24d8849a72ed4d1ee9, type: 2}
