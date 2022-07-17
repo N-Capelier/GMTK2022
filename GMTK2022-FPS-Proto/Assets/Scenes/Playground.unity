@@ -145,6 +145,7 @@ MonoBehaviour:
   - {fileID: 409980154}
   - {fileID: 517467405}
   clockIcon: {fileID: 780033340}
+  timerText: {fileID: 256236823}
 --- !u!1001 &78074534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -221,6 +222,17 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 241124093, guid: a3d45c229d0496c4b80cee1b7cc41c8d, type: 3}
   m_PrefabInstance: {fileID: 1218819666}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &256236823 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6646463253475769779, guid: a3d45c229d0496c4b80cee1b7cc41c8d, type: 3}
+  m_PrefabInstance: {fileID: 1218819666}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &350165653
 PrefabInstance:
   m_ObjectHideFlags: 0
