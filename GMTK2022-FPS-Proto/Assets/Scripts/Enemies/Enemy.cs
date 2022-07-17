@@ -99,7 +99,7 @@ public abstract class Enemy : MonoBehaviour
 	IEnumerator mirrorSelf()
 	{
 		yield return new WaitForSeconds(0.6f);
-		render.LeanScaleX(-render.transform.localScale.x, 0.01f);
+		render.transform.localScale = new Vector3(-render.transform.localScale.x, render.transform.localScale.y, render.transform.localScale.z);
 		StartCoroutine(mirrorSelf());
 	}
 }

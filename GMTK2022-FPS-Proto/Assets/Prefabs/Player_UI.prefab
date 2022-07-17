@@ -111,7 +111,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 1203, y: -356}
-  m_SizeDelta: {x: 304.7094, y: 304.7094}
+  m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &544395234
 CanvasRenderer:
@@ -802,6 +802,7 @@ GameObject:
   - component: {fileID: 6663843797873043643}
   - component: {fileID: 6265377111657188004}
   - component: {fileID: 3248937257223934545}
+  - component: {fileID: 6503687884715155342}
   m_Layer: 5
   m_Name: DiceBackground
   m_TagString: Untagged
@@ -867,6 +868,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &6503687884715155342
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5964406805240028677}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1daeeb150dc03ca4b90100a355d2dfc2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6017617277540673722
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,9 +989,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '10
-
-'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7076eab770a85d24d8849a72ed4d1ee9, type: 2}
   m_sharedMaterial: {fileID: -6060752667807295349, guid: 7076eab770a85d24d8849a72ed4d1ee9, type: 2}
@@ -980,8 +998,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4284076798
+  m_fontColor: {r: 0.9960785, g: 0.8235295, b: 0.34901962, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 0
   m_fontColorGradient:
@@ -1162,6 +1180,7 @@ GameObject:
   - component: {fileID: 7702939920881490790}
   - component: {fileID: 7702939920881490791}
   - component: {fileID: 7702939920881490788}
+  - component: {fileID: 69619709}
   m_Layer: 5
   m_Name: Player_UI
   m_TagString: Untagged
@@ -1258,6 +1277,31 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &69619709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7702939920881490789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f092071609ce8c47ba069e4fb1c9b47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartContainers:
+  - {fileID: 1088839204325990737}
+  - {fileID: 1672213018946474864}
+  - {fileID: 6935189229216527837}
+  clockIcon: {fileID: 9052979142637562184}
+  timerText: {fileID: 6646463253475769779}
+  ammoText: {fileID: 5739854358330018642}
+  loads:
+  - {fileID: 7945352954400760621}
+  - {fileID: 1739787997737520359}
+  - {fileID: 2101922624943882001}
+  - {fileID: 5730604254905683470}
+  ammoBackground: {fileID: 3248937257223934545}
 --- !u!1 &7702939921109185371
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,6 +20,8 @@ public class UiAnimation : Singleton<UiAnimation>
 
     [SerializeField] Image[] loads;
 
+    [SerializeField] Image ammoBackground;
+
     private void Awake()
     {
         CreateSingleton();
@@ -31,6 +33,7 @@ public class UiAnimation : Singleton<UiAnimation>
         player.playerShoot.UpdateWeaponUI += UpdateUIEvent;
         HeartTween();
         ClockTween();
+        TweenLoadUi();
         currentTime = startTime;
     }
 
@@ -47,12 +50,36 @@ public class UiAnimation : Singleton<UiAnimation>
     void UpdateUIEvent()
 	{
         ammoText.text = player.playerShoot.EquipedWeapon.currentBullets.ToString();
-
+        
 		for (int i = 0; i < 4; i++)
 		{
             loads[i].sprite = player.playerShoot.weapons[i].sprite;
 		}
+        TweenLoadUi();
+
+        switch(player.playerShoot.EquipedWeapon.weaponName)
+        {
+            case "d6":
+                ammoBackground.GetComponent<Animator>().Play("d6");
+                break;
+            case "d20":
+                ammoBackground.GetComponent<Animator>().Play("d20");
+                break;
+            case "d100":
+                ammoBackground.GetComponent<Animator>().Play("d100");
+                break;
+            default:
+                break;
+        }
 	}
+
+    void TweenLoadUi()
+    {
+        for (int i = 0;i < loads.Length; i++)
+        {
+            loads[i].gameObject.LeanRotateZ(loads[i].gameObject.transform.rotation.z + UnityEngine.Random.Range(45,180), UnityEngine.Random.Range(2.5f,7)).setLoopPingPong();
+        }
+    }
 
     TimeSpan timeSpan;
 
