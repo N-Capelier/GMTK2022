@@ -4,9 +4,9 @@ using UnityEngine;
 public class TestWeapon : Weapon
 {
 	public GameObject exploFx,bloodFx;
-	public override void Shoot(Vector3 origin, Vector3 direction, LayerMask layerMask)
+	public override void Shoot(Vector3 origin, Vector3 direction, LayerMask layerMask, LayerMask defaultLayer)
 	{
-		HitInfo hit = RaySensor(origin, direction, layerMask);
+		HitInfo hit = RaySensor(origin, direction, layerMask, defaultLayer);
 
 		if (hit.enemy != null)
         {
@@ -14,7 +14,7 @@ public class TestWeapon : Weapon
 			Instantiate(exploFx, hit.point, Quaternion.identity);
 			Instantiate(bloodFx, hit.point, Quaternion.identity);
 		}
-		else if (hit.enemy = null)
+		else if (hit.enemy == null && hit.point != Vector3.zero)
 		{
 			Instantiate(exploFx, hit.point, Quaternion.identity);
 		}

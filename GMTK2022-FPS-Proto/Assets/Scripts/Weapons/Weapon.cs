@@ -13,9 +13,9 @@ public abstract class Weapon : ScriptableObject
 	public float cooldown;
 	public float inaccuracy;
 
-	public abstract void Shoot(Vector3 origin, Vector3 direction, LayerMask layerMask);
+	public abstract void Shoot(Vector3 origin, Vector3 direction, LayerMask layerMask, LayerMask defaultLayer);
 
-	public HitInfo RaySensor(Vector3 origin, Vector3 direction, LayerMask layerMask)
+	public HitInfo RaySensor(Vector3 origin, Vector3 direction, LayerMask layerMask, LayerMask defaultLayer)
 	{
 		direction.x += Random.Range(-inaccuracy, inaccuracy);
 		direction.y += Random.Range(-inaccuracy, inaccuracy);
@@ -25,9 +25,18 @@ public abstract class Weapon : ScriptableObject
 
 		if (Physics.Raycast(origin, direction, out hit, 40f, layerMask))
 		{
-			return new HitInfo(hit.transform.GetComponent<Enemy>(), hit.point);
+			Enemy enemy = hit.transform.GetComponent<Enemy>();
+
+			if (enemy != null)
+			{
+				return new HitInfo(hit.transform.GetComponent<Enemy>(), hit.point);
+			}
 		}
-		Debug.DrawRay(origin, direction * 20f, Color.red, 2f);
+
+		if(Physics.Raycast(origin, direction, out hit, 40f, defaultLayer))
+		{
+			return new HitInfo(null, hit.point);
+		}
 
 		return new HitInfo(null, Vector3.zero);
 	}

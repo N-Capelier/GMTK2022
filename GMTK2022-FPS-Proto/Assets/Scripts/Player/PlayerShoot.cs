@@ -18,6 +18,7 @@ public class PlayerShoot : MonoBehaviour
 
 	[Header("Params")]
 	[SerializeField] LayerMask enemyLayerMask;
+	[SerializeField] LayerMask defaultLayerMask;
 
 	public Weapon[] weapons = new Weapon[4];
 	public Weapon EquipedWeapon { get => weapons[0]; }
@@ -66,7 +67,7 @@ public class PlayerShoot : MonoBehaviour
 		if (isReloading)
 			return;
 
-		EquipedWeapon.Shoot(cameraTransform.position, cameraTransform.forward, enemyLayerMask);
+		EquipedWeapon.Shoot(cameraTransform.position, cameraTransform.forward, enemyLayerMask, defaultLayerMask);
 		EquipedWeapon.currentBullets--;
 		//VISUALS
 		ShotFeedback();
