@@ -1,4 +1,3 @@
-using NaughtyAttributes;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,6 +8,9 @@ public class PlayerShoot : MonoBehaviour
 	bool canShoot = true;
 	bool isShooting = false;
 	Clock shootCooldownTimer;
+
+	bool isReloading = false;
+	Clock reloadTimer;
 
 	[Header("References")]
 	[SerializeField] Transform cameraTransform;
@@ -41,17 +43,29 @@ public class PlayerShoot : MonoBehaviour
 
 	private void Start()
 	{
+		audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+
 		shootCooldownTimer = new Clock();
 		shootCooldownTimer.ClockEnded += ShootCooldownTimer_ClockEnded;
+
+		reloadTimer = new Clock();
+		reloadTimer.ClockEnded += ReloadTimer_ClockEnded;
+
 		SetWeapon(defaultWeapon);
 		crossHairOriginalSize = crossHair.transform.localScale;
 
-		audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+	}
+
+	private void ReloadTimer_ClockEnded()
+	{
+		isReloading = false;
 	}
 
 	void ShootWeapon()
 	{
-		Debug.Log("Shooting");
+		if (isReloading)
+			return;
+
 		EquipedWeapon.Shoot(cameraTransform.position, cameraTransform.forward, enemyLayerMask);
 		EquipedWeapon.currentBullets--;
 		//VISUALS
@@ -60,16 +74,35 @@ public class PlayerShoot : MonoBehaviour
 
 		if (EquipedWeapon.currentBullets <= 0)
 		{
-			for (int i = 0; i < weapons.Length - 1; i++)
-			{
-				weapons[i] = weapons[i + 1];
-				//StartCoroutine(reloadAnimation(weapons[i]));
-			}
-			weapons[weapons.Length - 1] = Instantiate(defaultWeapon);
+			Reload();
 		}
 
 		UpdateWeaponUI?.Invoke();
 
+		//string info = string.Empty;
+
+		//for (int i = 0; i < weapons.Length; i++)
+		//{
+		//	info += $" - {weapons[i].name}:{weapons[i].currentBullets}";
+		//}
+
+		//Debug.Log(info);
+	}
+
+	void Reload()
+	{
+		isReloading = true;
+		reloadTimer.SetTime(reloadTime);
+
+		StartCoroutine(ReloadAnimation(weapons[1]));
+
+		for (int i = 0; i < weapons.Length - 1; i++)
+		{
+			weapons[i] = weapons[i + 1];
+			//StartCoroutine(reloadAnimation(weapons[i]));
+		}
+		weapons[weapons.Length - 1] = Instantiate(defaultWeapon);
+		weapons[weapons.Length - 1].currentBullets = weapons[weapons.Length - 1].maxBullets;
 	}
 
 	private void ShootCooldownTimer_ClockEnded()
@@ -94,6 +127,15 @@ public class PlayerShoot : MonoBehaviour
 		for (int i = 0; i < weapons.Length; i++)
 		{
 			weapons[i] = Instantiate(weapon);
+			weapons[i].currentBullets = weapons[i].maxBullets;
+		}
+
+		if(!isReloading)
+		{
+			isReloading = true;
+			reloadTimer.SetTime(reloadTime);
+
+			StartCoroutine(ReloadAnimation(weapons[1]));
 		}
 
 		UpdateWeaponUI?.Invoke();
@@ -126,15 +168,15 @@ public class PlayerShoot : MonoBehaviour
 
 		Pickup pickup = other.GetComponent<Pickup>();
 		//SFX
-		audioManager.PlaySound(6,transform.position);
+		audioManager.PlaySound(6, transform.position);
 		SetWeapon(pickup.weapon);
 		Destroy(pickup.gameObject);
 	}
 
 	public float reloadTime;
 
-	public IEnumerator reloadAnimation(Weapon weapon)
-    {
+	public IEnumerator ReloadAnimation(Weapon weapon)
+	{
 		//HAND ANIM
 		handUiAnimator.Play("hand_reload");
 		audioManager.PlaySound(9, transform.position);
@@ -142,7 +184,7 @@ public class PlayerShoot : MonoBehaviour
 		reloadDice.GetComponent<Image>().enabled = true;
 		//STOP TWEEN
 		//TWEEN SIZE
-		reloadDice.LeanScale(new Vector3(1.5f,1.5f),reloadTime/5).setLoopPingPong();
+		reloadDice.LeanScale(new Vector3(1.5f, 1.5f), reloadTime / 5).setLoopPingPong();
 		//SET DICE POS
 		Vector3 handPos = handUi.transform.position;
 		reloadDice.transform.position = handPos;
@@ -151,27 +193,27 @@ public class PlayerShoot : MonoBehaviour
 		//MOVE DICE UP
 		reloadDice.LeanMoveY(handPos.y + 1000, reloadTime * 0.2f);
 		//ROTATE DICE ANIM
-		for (int i = 0;i < 50; i++)
-        {
+		for (int i = 0; i < 50; i++)
+		{
 			reloadDice.LeanRotateZ(reloadDice.transform.localRotation.z + 40 * i, 0.05f);
 			yield return new WaitForSeconds(reloadTime * 0.2f / 50);
 		}
 		yield return new WaitForSeconds(0.6f * reloadTime);
 		//SET DICE POS
-		Vector3 gunPos =  gunUi.transform.position;
+		Vector3 gunPos = gunUi.transform.position;
 		gunPos.y = gunPos.y + 1000;
 		reloadDice.transform.position = gunPos;
-        //SET GUN ANIM
-        gunUiAnimator.Play("gun_reload");
+		//SET GUN ANIM
+		gunUiAnimator.Play("gun_reload");
 		//SOUND
-        audioManager.PlaySound(13, transform.position);
+		audioManager.PlaySound(13, transform.position);
 		//MOVE DICE DOWN
-		reloadDice.LeanMoveY(reloadDice.transform.position.y - gunPos.y * 0.7f, reloadTime *0.2f);
+		reloadDice.LeanMoveY(reloadDice.transform.position.y - gunPos.y * 0.7f, reloadTime * 0.2f);
 		//ROTATE DICE
 		for (int i = 0; i < 50; i++)
 		{
 			reloadDice.LeanRotateZ(reloadDice.transform.localRotation.z + 40 * i, 0.05f);
-			yield return new WaitForSeconds(reloadTime *0.2f/60);
+			yield return new WaitForSeconds(reloadTime * 0.2f / 60);
 		}
 		//SOUND
 		audioManager.PlaySound(10, transform.position);
@@ -181,19 +223,19 @@ public class PlayerShoot : MonoBehaviour
 		// SET INACTIVE
 		reloadDice.GetComponent<Image>().enabled = false;
 		yield return null;
-    }
+	}
 
 	void CrosshairFeedback()
-    {
+	{
 		crossHair.transform.localScale = crossHairOriginalSize;
-		crossHair.LeanRotateZ(Random.Range(90,360), 0.05f).setLoopPingPong(1);
-		crossHair.LeanScale(new Vector3(crossHairOriginalSize.x * Random.Range(1.2f, 2f), crossHairOriginalSize.y * Random.Range(1.2f, 2f),1),0.06f).setLoopPingPong(1);
-    }
+		crossHair.LeanRotateZ(Random.Range(90, 360), 0.05f).setLoopPingPong(1);
+		crossHair.LeanScale(new Vector3(crossHairOriginalSize.x * Random.Range(1.2f, 2f), crossHairOriginalSize.y * Random.Range(1.2f, 2f), 1), 0.06f).setLoopPingPong(1);
+	}
 
 	private int shotFxLoop = 1;
 
 	void ShotFeedback()
-    {
+	{
 		//FX OF THE SHOT
 		gunUiAnimator.Play("gun_shoot");
 		audioManager.PlaySoundVariant(4, transform.position);
