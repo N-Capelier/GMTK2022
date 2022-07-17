@@ -4,6 +4,8 @@ public abstract class Weapon : ScriptableObject
 {
 	public string weaponName;
 
+	public Sprite sprite;
+
 	public int maxBullets;
 	[HideInInspector] public int currentBullets;
 

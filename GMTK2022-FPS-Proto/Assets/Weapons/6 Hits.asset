@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 6 Hits
   m_EditorClassIdentifier: 
   weaponName: d6
+  sprite: {fileID: 21300000, guid: c248cf2b6d8727641b77d6edba41bb03, type: 3}
   maxBullets: 6
   currentBullets: 0
   damage: 8

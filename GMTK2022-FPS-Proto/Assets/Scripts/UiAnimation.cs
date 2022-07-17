@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 public class UiAnimation : Singleton<UiAnimation>
 {
@@ -15,6 +16,10 @@ public class UiAnimation : Singleton<UiAnimation>
     float startTime = 10f * 60f;
     float currentTime;
 
+    [SerializeField] TextMeshProUGUI ammoText;
+
+    [SerializeField] Image[] loads;
+
     private void Awake()
     {
         CreateSingleton();
@@ -22,7 +27,8 @@ public class UiAnimation : Singleton<UiAnimation>
 
     void Start()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerInstance>();
+        player = PlayerInstance.Instance;
+        player.playerShoot.UpdateWeaponUI += UpdateUIEvent;
         HeartTween();
         ClockTween();
         currentTime = startTime;
@@ -35,6 +41,16 @@ public class UiAnimation : Singleton<UiAnimation>
         if(currentTime <= 0)
 		{
             ///////////// END GAME
+		}
+	}
+
+    void UpdateUIEvent()
+	{
+        ammoText.text = player.playerShoot.EquipedWeapon.currentBullets.ToString();
+
+		for (int i = 0; i < 4; i++)
+		{
+            loads[i].sprite = player.playerShoot.weapons[i].sprite;
 		}
 	}
 

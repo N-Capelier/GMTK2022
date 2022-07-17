@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class PlayerInstance : Singleton<PlayerInstance>
 {
+	public PlayerShoot playerShoot;
+
+	[Space]
 	[SerializeField] int maxHealthPoints;
 	[SerializeField] float invulnerabilityTime;
 	[HideInInspector] public int currentHealthPoints;
@@ -34,7 +37,7 @@ public class PlayerInstance : Singleton<PlayerInstance>
 	{
 		canTakeDamage = true;
 	}
-	
+
 	public bool ReceiveDamage(int amount)
 	{
 		if (!canTakeDamage)
@@ -43,7 +46,7 @@ public class PlayerInstance : Singleton<PlayerInstance>
 		canTakeDamage = false;
 		invulnerabilityTimer.SetTime(invulnerabilityTime);
 
-		if(currentHealthPoints - amount <= 0)
+		if (currentHealthPoints - amount <= 0)
 		{
 			currentHealthPoints = 0;
 			Death();

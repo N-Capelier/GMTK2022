@@ -19,8 +19,8 @@ public class PlayerShoot : MonoBehaviour
 	[Header("Params")]
 	[SerializeField] LayerMask enemyLayerMask;
 
-	Weapon[] weapons = new Weapon[4];
-	Weapon EquipedWeapon { get => weapons[0]; }
+	public Weapon[] weapons = new Weapon[4];
+	public Weapon EquipedWeapon { get => weapons[0]; }
 
 	public delegate void UIEventHandler();
 	public event UIEventHandler UpdateWeaponUI;
@@ -72,12 +72,12 @@ public class PlayerShoot : MonoBehaviour
 		ShotFeedback();
 		CrosshairFeedback();
 
+		UpdateWeaponUI?.Invoke();
+
 		if (EquipedWeapon.currentBullets <= 0)
 		{
 			Reload();
 		}
-
-		UpdateWeaponUI?.Invoke();
 
 		//string info = string.Empty;
 
@@ -222,6 +222,9 @@ public class PlayerShoot : MonoBehaviour
 		gunUiAnimator.Play("gun_reload2");
 		// SET INACTIVE
 		reloadDice.GetComponent<Image>().enabled = false;
+
+		UpdateWeaponUI?.Invoke();
+
 		yield return null;
 	}
 
